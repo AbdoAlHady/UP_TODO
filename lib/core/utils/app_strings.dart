@@ -15,6 +15,7 @@ class AppStrings {
   static const String note = 'Note';
   static const String noteHint = 'Enter note here';
   static const String date = 'Date';
+   static const String back = 'BACK';
   static const String today = 'Today';
   static const String startTime = 'Start Time';
   static const String endTime = 'End Time';
