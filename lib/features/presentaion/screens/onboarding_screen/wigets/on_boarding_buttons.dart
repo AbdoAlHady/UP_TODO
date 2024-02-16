@@ -21,7 +21,6 @@ class OnBoardingButtons extends StatelessWidget {
       listener: (context, state){
         if (state is JumpToHomeScreen) {
            Navigator.pushNamed(context, Routes.homeScreen);
-          context.read<OnBoardingCubit>().controller.jumpToPage(0);
         }
       },
       builder: (context, state) {

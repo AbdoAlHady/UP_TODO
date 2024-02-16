@@ -21,7 +21,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
   void nextPage() {
     if (currentIndex == 2) {
-      currentIndex = 0;
+      currentIndex = 2;
       emit(JumpToHomeScreen());
     } else {
       currentIndex = currentIndex + 1;
