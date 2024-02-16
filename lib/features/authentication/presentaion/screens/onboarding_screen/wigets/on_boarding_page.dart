@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theme/text_styles.dart';
-import '../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/helpers/spacing.dart';
+import '../../../../../../core/theme/text_styles.dart';
+import '../../../../../../core/utils/app_colors.dart';
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage(
       {super.key,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/core/routing/routes.dart';
-import 'package:todo_app/features/presentaion/cubit/on_boarding_cubit.dart';
-import 'package:todo_app/features/presentaion/screens/onboarding_screen/on_boarding_screen.dart';
+import 'package:todo_app/features/authentication/presentaion/cubit/on_boarding_cubit.dart';
+import 'package:todo_app/features/authentication/presentaion/screens/onboarding_screen/on_boarding_screen.dart';
 import 'package:todo_app/features/task/presentation/screens/home_screen/home_screen.dart';
 
 class AppRouter {

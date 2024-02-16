@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/utils/app_assets.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
-import 'package:todo_app/features/presentaion/cubit/on_boarding_cubit.dart';
-import 'package:todo_app/features/presentaion/screens/onboarding_screen/wigets/on_boarding_buttons.dart';
-import 'package:todo_app/features/presentaion/screens/onboarding_screen/wigets/on_boarding_dot.dart';
-import 'package:todo_app/features/presentaion/screens/onboarding_screen/wigets/skip_and_back_text.dart';
+import 'package:todo_app/features/authentication/presentaion/cubit/on_boarding_cubit.dart';
+import 'package:todo_app/features/authentication/presentaion/screens/onboarding_screen/wigets/on_boarding_buttons.dart';
+import 'package:todo_app/features/authentication/presentaion/screens/onboarding_screen/wigets/on_boarding_dot.dart';
+import 'package:todo_app/features/authentication/presentaion/screens/onboarding_screen/wigets/skip_and_back_text.dart';
 import 'wigets/on_boarding_page.dart';
 
 class OnBoardingScreen extends StatelessWidget {

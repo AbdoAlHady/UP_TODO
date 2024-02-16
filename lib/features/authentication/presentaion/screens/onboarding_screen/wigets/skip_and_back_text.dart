@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/theme/text_styles.dart';
+import '../../../../../../core/theme/text_styles.dart';
 
 class SkipAndBackText extends StatelessWidget {
   const SkipAndBackText({
