@@ -15,7 +15,7 @@ class AppStrings {
   static const String note = 'Note';
   static const String noteHint = 'Enter note here';
   static const String date = 'Date';
-   static const String back = 'BACK';
+  static const String back = 'BACK';
   static const String today = 'Today';
   static const String startTime = 'Start Time';
   static const String endTime = 'End Time';
@@ -30,4 +30,5 @@ class AppStrings {
   static const String onBoardingTitle3 = 'Organaize your tasks';
   static const String onBoardingSubtitle3 =
       'You can organize your daily tasks by adding your tasks into separate categories';
+  static const String isBoardingVisitedKey = 'sBoardingVisited';
 }

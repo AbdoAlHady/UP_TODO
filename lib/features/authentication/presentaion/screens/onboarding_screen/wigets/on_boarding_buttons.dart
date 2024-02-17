@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/core/database/cache_helper.dart';
 import 'package:todo_app/core/routing/routes.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/features/authentication/presentaion/cubit/on_boarding_state.dart';
@@ -16,9 +17,10 @@ class OnBoardingButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<OnBoardingCubit, OnBoardingState>(
-      listener: (context, state){
-        if (state is JumpToHomeScreen) {
-           Navigator.pushNamed(context, Routes.homeScreen);
+      listener: (context, state) {
+        if (state is JumpToHomeScreen){
+          CacheHelper().saveData(key:AppStrings.isBoardingVisitedKey, value: true);
+          Navigator.pushNamed(context, Routes.homeScreen);
         }
       },
       builder: (context, state) {
@@ -38,7 +40,10 @@ class OnBoardingButtons extends StatelessWidget {
               buttonWidth:
                   context.read<OnBoardingCubit>().currentIndex == 2 ? 151 : 90,
               onPressed: () => context.read<OnBoardingCubit>().nextPage(),
-              textStyle:Theme.of(context).textTheme.titleSmall!.apply(color: AppColors.white),
+              textStyle: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .apply(color: AppColors.white),
             ),
           ],
         );
