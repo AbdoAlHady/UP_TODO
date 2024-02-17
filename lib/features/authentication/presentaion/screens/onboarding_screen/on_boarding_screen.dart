@@ -34,6 +34,7 @@ class OnBoardingScreen extends StatelessWidget {
                         PageView(
                           controller:
                               context.read<OnBoardingCubit>().controller,
+                              onPageChanged:context.read<OnBoardingCubit>().updatePageIndicator ,
                           children: const [
                             OnBoardingPage(
                                 onBoardingTitle: AppStrings.onBoardingTitle1,
