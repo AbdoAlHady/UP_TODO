@@ -5,7 +5,7 @@ import 'package:todo_app/core/routing/app_routing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheHelper().init();
+  await CacheHelper.init();
   runApp(TodoApp(
     appRouter: AppRouter(),
   ));
