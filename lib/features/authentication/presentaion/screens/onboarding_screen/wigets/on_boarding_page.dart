@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/core/helpers/helper_functions.dart';
 import '../../../../../../core/helpers/spacing.dart';
-import '../../../../../../core/theme/text_styles.dart';
 import '../../../../../../core/utils/app_colors.dart';
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage(
@@ -15,6 +15,7 @@ class OnBoardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   final dark = HelperFunctions.isDarkMode(context);
     return Column(
             children: [
               verticalSapce(15),
@@ -24,14 +25,13 @@ class OnBoardingPage extends StatelessWidget {
               /// Dots
               verticalSapce(50),
               /// Title
-              Text(onBoardingTitle, style: TextStyles.font32WhiteBold),
+              Text(onBoardingTitle, style: Theme.of(context).textTheme.displayLarge),
               verticalSapce(40),
               /// supTitle
               Text(
                 onBoardingSupTitle,
                 textAlign: TextAlign.center,
-                style: TextStyles.font16WhiteRegular
-                    .copyWith(color: AppColors.white.withOpacity(0.87)),
+                style:Theme.of(context).textTheme.titleMedium!.apply(color:dark? AppColors.white.withOpacity(0.87):AppColors.dark.withOpacity(0.87)),
               ),
               verticalSapce(80),
             ],

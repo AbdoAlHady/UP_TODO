@@ -4,8 +4,6 @@ import 'package:todo_app/core/routing/routes.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/features/authentication/presentaion/cubit/on_boarding_state.dart';
 import 'package:todo_app/features/authentication/presentaion/screens/onboarding_screen/wigets/skip_and_back_text.dart';
-
-import '../../../../../../core/theme/text_styles.dart';
 import '../../../../../../core/utils/app_strings.dart';
 import '../../../../../../core/widgets/app_elveated_button.dart';
 import '../../../cubit/on_boarding_cubit.dart';
@@ -40,8 +38,7 @@ class OnBoardingButtons extends StatelessWidget {
               buttonWidth:
                   context.read<OnBoardingCubit>().currentIndex == 2 ? 151 : 90,
               onPressed: () => context.read<OnBoardingCubit>().nextPage(),
-              textStyle:
-                  TextStyles.font16WhiteRegular.apply(color: AppColors.white),
+              textStyle:Theme.of(context).textTheme.titleSmall!.apply(color: AppColors.white),
             ),
           ],
         );

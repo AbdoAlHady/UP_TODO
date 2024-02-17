@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/theme/text_styles.dart';
+import 'package:todo_app/core/utils/app_colors.dart';
 
 class SkipAndBackText extends StatelessWidget {
   const SkipAndBackText({
@@ -17,7 +16,7 @@ class SkipAndBackText extends StatelessWidget {
         onTap: onTap,
         child: Text(
          text,
-          style: TextStyles.font16WhiteRegular,
+          style: Theme.of(context).textTheme.titleSmall!.apply(color: AppColors.grey),
         ),
       ),
     );
