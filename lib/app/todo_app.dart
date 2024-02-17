@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/core/database/cache_helper.dart';
 import 'package:todo_app/core/routing/app_routing.dart';
 import 'package:todo_app/core/routing/routes.dart';
 import 'package:todo_app/core/theme/app_theme.dart';
+import 'package:todo_app/core/utils/app_strings.dart';
 
 class TodoApp extends StatelessWidget {
   const TodoApp({super.key, required this.appRouter});
@@ -10,6 +12,8 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isBoarding =
+        CacheHelper().getData(key: AppStrings.isBoardingVisitedKey);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -19,10 +23,13 @@ class TodoApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          initialRoute: Routes.onBoardingScreen,
+          initialRoute: isBoarding != null
+              ? isBoarding == true
+                  ? Routes.homeScreen
+                  : Routes.onBoardingScreen
+              : Routes.onBoardingScreen,
         );
       },
-
     );
   }
 }
