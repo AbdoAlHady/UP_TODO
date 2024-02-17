@@ -20,7 +20,7 @@ class AppStrings {
   static const String startTime = 'Start Time';
   static const String endTime = 'End Time';
   static const String emptyTaskTitle = 'What do you want to do today?';
-  static const String emptyTaskSubTitle = 'What do you want to do today?';
+  static const String emptyTaskSubTitle = 'Tap + to add your tasks';
   static const String onBoardingTitle1 = 'Manage your tasks';
   static const String onBoardingSubtitle1 =
       'You can easily manage all of your daily tasks in DoMe for free';
