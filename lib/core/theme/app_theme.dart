@@ -10,7 +10,7 @@ class AppTheme {
       brightness: Brightness.light,
       // AppBar Theme
       appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.dark, elevation: 0, centerTitle: true),
+          backgroundColor: AppColors.white, elevation: 0, centerTitle: true),
       textTheme: AppTextTheme.lightTextTheme,
       elevatedButtonTheme: AppElevatedButtonTheme.lightTheme,
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -24,7 +24,7 @@ class AppTheme {
       elevatedButtonTheme: AppElevatedButtonTheme.darkTheme,
       // AppBar Theme
       appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.white, elevation: 0, centerTitle: true),
+          backgroundColor: AppColors.dark, elevation: 0, centerTitle: true),
       textTheme: AppTextTheme.darkTextTheme,
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.primaryColor,

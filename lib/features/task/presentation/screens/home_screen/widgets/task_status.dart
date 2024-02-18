@@ -18,13 +18,13 @@ class TaskStatus extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            color: AppColors.lightGrey,
+            color: AppColors.white,
             width: 80.h,
             height: 1.w,
             
           ),
           verticalSapce(3),
-          Text(AppStrings.todo,style: Theme.of(context).textTheme.titleSmall,)
+          Text(AppStrings.todo,style: Theme.of(context).textTheme.titleSmall?.apply(color: AppColors.white),)
         ],
       ),
     );

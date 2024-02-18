@@ -43,11 +43,11 @@ class TaskItem extends StatelessWidget {
                   // Time
                   Row(
                     children: [
-                      const Icon(Icons.watch_later_outlined),
+                      const Icon(Icons.watch_later_outlined,color: AppColors.white,),
                       horizontalSpace(8),
                       Text(
                         '09:33 PM - 09:48 PM',
-                        style: Theme.of(context).textTheme.titleSmall,
+                        style: Theme.of(context).textTheme.titleSmall?.apply(color: AppColors.white),
                       ),
                     ],
                   ),
@@ -58,7 +58,7 @@ class TaskItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .displaySmall!
-                        .copyWith(fontWeight: FontWeightHelpers.regular),
+                        .copyWith(fontWeight: FontWeightHelpers.regular,color: AppColors.white),
                   ),
                 ],
               ),

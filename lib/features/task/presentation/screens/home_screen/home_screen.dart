@@ -2,7 +2,9 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app/core/helpers/extension.dart';
 import 'package:todo_app/core/helpers/spacing.dart';
+import 'package:todo_app/core/routing/routes.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
 
@@ -41,20 +43,21 @@ class HomeScreen extends StatelessWidget {
                   onDateChange: (date) {},
                 ),
                 verticalSapce(30),
-            
+
                 // Empty Tasks
                 const TaskItem(),
                 const TaskItem(),
                 const TaskItem(),
                 const TaskItem(),
-            
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.pushNamed(Routes.addTaskScreen);
+        },
         child: const Icon(
           Icons.add,
           color: AppColors.white,
@@ -63,4 +66,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
