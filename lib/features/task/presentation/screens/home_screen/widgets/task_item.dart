@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/core/utils/app_strings.dart';
-
+import 'package:todo_app/features/task/presentation/screens/home_screen/widgets/task_status.dart';
 import '../../../../../../core/helpers/font_weight_helper.dart';
 import '../../../../../../core/helpers/spacing.dart';
 import '../../../../../../core/utils/app_colors.dart';
@@ -60,24 +59,11 @@ class TaskItem extends StatelessWidget {
               ],
             ),
           ),
-          RotatedBox(
-            quarterTurns: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  color: AppColors.lightGrey,
-                  width: 80.h,
-                  height: 1.w,
-                  
-                ),
-                verticalSapce(3),
-                Text(AppStrings.todo,style: Theme.of(context).textTheme.titleSmall,)
-              ],
-            ),
-          )
+          const TaskStatus()
         ],
       ),
     );
   }
 }
+
+

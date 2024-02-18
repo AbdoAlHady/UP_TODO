@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../../core/helpers/spacing.dart';
+import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/utils/app_strings.dart';
+
+class TaskStatus extends StatelessWidget {
+  const TaskStatus({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RotatedBox(
+      quarterTurns: 3,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            color: AppColors.lightGrey,
+            width: 80.h,
+            height: 1.w,
+            
+          ),
+          verticalSapce(3),
+          Text(AppStrings.todo,style: Theme.of(context).textTheme.titleSmall,)
+        ],
+      ),
+    );
+  }
+}
