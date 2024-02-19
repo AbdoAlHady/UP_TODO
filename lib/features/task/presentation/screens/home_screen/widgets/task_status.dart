@@ -8,7 +8,9 @@ import '../../../../../../core/utils/app_strings.dart';
 class TaskStatus extends StatelessWidget {
   const TaskStatus({
     super.key,
+    required this.isComplete,
   });
+  final bool isComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,15 @@ class TaskStatus extends StatelessWidget {
             color: AppColors.white,
             width: 80.h,
             height: 1.w,
-            
           ),
           verticalSapce(3),
-          Text(AppStrings.todo,style: Theme.of(context).textTheme.titleSmall?.apply(color: AppColors.white),)
+          Text(
+            isComplete ? AppStrings.compelete : AppStrings.todo,
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.apply(color: AppColors.white),
+          )
         ],
       ),
     );

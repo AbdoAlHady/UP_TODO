@@ -1,8 +1,11 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/helpers/spacing.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
 import 'package:todo_app/core/widgets/app_elveated_button.dart';
+import 'package:todo_app/features/task/presentation/cubit/add_task_cubit.dart';
 import 'package:todo_app/features/task/presentation/screens/tasks_screen/widgets/task_colors.dart';
 import 'package:todo_app/features/task/presentation/screens/tasks_screen/widgets/task_date.dart';
 import 'package:todo_app/features/task/presentation/screens/tasks_screen/widgets/task_duration_time.dart';
@@ -27,13 +30,13 @@ class AddTaskScreen extends StatelessWidget {
               Text(AppStrings.title,
                   style: Theme.of(context).textTheme.titleSmall),
               verticalSapce(10),
-              const AppTextFormField(hintText: AppStrings.titleHint),
+              AppTextFormField(hintText: AppStrings.titleHint,controller: context.read<TaskCubit>().title,),
               verticalSapce(24),
               // Note
               Text(AppStrings.note,
                   style: Theme.of(context).textTheme.titleSmall),
               verticalSapce(10),
-              const AppTextFormField(hintText: AppStrings.noteHint),
+              AppTextFormField(hintText: AppStrings.noteHint,controller: context.read<TaskCubit>().note),
               verticalSapce(24),
               // Date
               const TaskDate(),

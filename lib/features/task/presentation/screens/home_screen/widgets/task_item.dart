@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/features/task/data/model/task_model.dart';
+import 'package:todo_app/features/task/presentation/cubit/add_task_cubit.dart';
 import 'package:todo_app/features/task/presentation/screens/home_screen/widgets/task_status.dart';
 import '../../../../../../core/helpers/font_weight_helper.dart';
 import '../../../../../../core/helpers/spacing.dart';
@@ -9,8 +12,9 @@ import '../functions/show_bottom_sheet.dart';
 class TaskItem extends StatelessWidget {
   const TaskItem({
     super.key,
+    required this.task,
   });
-
+  final TaskModel task;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,11 +23,12 @@ class TaskItem extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10.h),
-        height: 128.h,
+        height: 130.h,
         width: double.infinity,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-            color: AppColors.green, borderRadius: BorderRadius.circular(16)),
+            color: context.read<TaskCubit>().getColor(task.color),
+            borderRadius: BorderRadius.circular(16)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -33,7 +38,7 @@ class TaskItem extends StatelessWidget {
                 children: [
                   // Title
                   Text(
-                    'Task 1',
+                    task.title,
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
@@ -43,27 +48,34 @@ class TaskItem extends StatelessWidget {
                   // Time
                   Row(
                     children: [
-                      const Icon(Icons.watch_later_outlined,color: AppColors.white,),
+                      const Icon(
+                        Icons.watch_later_outlined,
+                        color: AppColors.white,
+                      ),
                       horizontalSpace(8),
                       Text(
-                        '09:33 PM - 09:48 PM',
-                        style: Theme.of(context).textTheme.titleSmall?.apply(color: AppColors.white),
+                        '${task.startTime}- ${task.endTime}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.apply(color: AppColors.white),
                       ),
                     ],
                   ),
                   verticalSapce(8),
-                  // Description
+                  // Note
                   Text(
-                    'Learn Dart Learn Dart',
-                    style: Theme.of(context)
-                        .textTheme
-                        .displaySmall!
-                        .copyWith(fontWeight: FontWeightHelpers.regular,color: AppColors.white),
+                    task.note,
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                        fontWeight: FontWeightHelpers.regular,
+                        color: AppColors.white),
                   ),
                 ],
               ),
             ),
-            const TaskStatus()
+            TaskStatus(
+              isComplete: task.isComplete,
+            )
           ],
         ),
       ),

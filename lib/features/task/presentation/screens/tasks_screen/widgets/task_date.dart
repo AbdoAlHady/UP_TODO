@@ -1,50 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/features/task/presentation/cubit/add_task_state.dart';
 
 import '../../../../../../core/helpers/spacing.dart';
 import '../../../../../../core/utils/app_strings.dart';
 import '../../../../../../core/widgets/app_text_form_field.dart';
+import '../../../cubit/add_task_cubit.dart';
 
-class TaskDate extends StatefulWidget {
+class TaskDate extends StatelessWidget {
   const TaskDate({super.key});
 
   @override
-  State<TaskDate> createState() => _TaskDateState();
-}
-
-class _TaskDateState extends State<TaskDate> {
-   DateTime currentDate = DateTime.now();
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(AppStrings.date, style: Theme.of(context).textTheme.titleSmall),
-        verticalSapce(10),
-        AppTextFormField(
-          readOnly: true,
-          hintText: DateFormat.yMd().format(currentDate).toString(),
-          suffixIcon: GestureDetector(
-              onTap: () async {
-                await selectDate(context);
-              },
-              child: const Icon(Icons.calendar_month_sharp)),
-        ),
-      ],
+    return BlocBuilder<TaskCubit, TaskState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(AppStrings.date,
+                style: Theme.of(context).textTheme.titleSmall),
+            verticalSapce(10),
+            AppTextFormField(
+              readOnly: true,
+              hintText: context.read<TaskCubit>().currentDate,
+              suffixIcon: GestureDetector(
+                  onTap: () {
+                    context.read<TaskCubit>().getDate(context);
+                  },
+                  child: const Icon(Icons.calendar_month_sharp)),
+            ),
+          ],
+        );
+      },
     );
-  }
-
-  Future<void> selectDate(BuildContext context) async {
-     DateTime? selectedDate = await showDatePicker(
-      context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2025),
-    );
-    if (selectedDate != null) {
-      setState(() {
-        currentDate = selectedDate;
-      });
-    }
   }
 }
