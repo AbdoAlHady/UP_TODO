@@ -16,3 +16,7 @@ class GetEndTimeSuccessState extends TaskState{}
 class GetEndTimeFailureState extends TaskState{}
 
 class ChangeColorState extends TaskState{}
+
+class AddTaskLoadingState extends TaskState{}
+class AddTaskSuccessState extends TaskState{}
+class AddTaskFailureState extends TaskState{}

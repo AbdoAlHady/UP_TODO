@@ -16,6 +16,7 @@ class TaskCubit extends Cubit<TaskState> {
   String endTime = DateFormat('hh:mm a')
       .format(DateTime.now().add(const Duration(minutes: 45)));
   int currentIndex = 0;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   //! Get Date
   void getDate(context) async {
@@ -58,11 +59,11 @@ class TaskCubit extends Cubit<TaskState> {
       emit(GetEndTimeFailureState());
     }
   }
-  
+
   //! Get Color
-    Color getColor(index) {
+  Color getColor(index) {
     switch (index) {
-      case 0: 
+      case 0:
         return AppColors.red;
       case 1:
         return AppColors.green;
@@ -78,6 +79,7 @@ class TaskCubit extends Cubit<TaskState> {
         return AppColors.grey;
     }
   }
+
   void changeColorIndex(index) {
     currentIndex = index;
     emit(ChangeColorState());
@@ -103,6 +105,32 @@ class TaskCubit extends Cubit<TaskState> {
         color: 3,
         date: '20/2/2023'),
   ];
+
+  //! Add Task
+  void addTask() async {
+    emit(AddTaskLoadingState());
+    try {
+      await Future.delayed(const Duration(seconds: 3));
+      final task = TaskModel(
+        title: title.text,
+        note: note.text,
+        startTime: startTime,
+        endTime: endTime,
+        date: currentDate,
+        id: '5',
+        isComplete: false,
+        color: currentIndex,
+      );
+      tasksList.add(task);
+      title.clear();
+      note.clear();
+      currentIndex = 0;
+      currentDate = DateFormat.yMd().format(DateTime.now());
+      startTime = DateFormat('hh:mm a').format(DateTime.now());
+      endTime=DateFormat('hh:mm a').format(DateTime.now().add(const Duration(minutes: 30)));
+      emit(AddTaskSuccessState());
+    } catch (e) {
+      emit(AddTaskFailureState());
+    }
+  }
 }
-
-

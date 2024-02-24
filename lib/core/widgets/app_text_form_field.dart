@@ -15,7 +15,9 @@ class AppTextFormField extends StatelessWidget {
       this.height,
       this.textStyle,
       this.contentPadding,
-      this.readOnly, this.controller});
+      this.readOnly,
+      this.controller,
+      this.validator});
   final String hintText;
   final Color? fillColor;
   final Color? borderColor;
@@ -27,14 +29,15 @@ class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final bool? readOnly;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
     return TextFormField(
       controller: controller,
-      
       readOnly: readOnly ?? false,
+      validator: validator,
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
@@ -50,15 +53,24 @@ class AppTextFormField extends StatelessWidget {
           borderSide:
               BorderSide(width: 1.3, color: borderColor ?? AppColors.grey),
         ),
-        focusedBorder:readOnly==true? OutlineInputBorder(
+        focusedBorder: readOnly == true
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius ?? 4.0),
+                borderSide: BorderSide(
+                    width: 1.3, color: borderColor ?? AppColors.grey),
+              )
+            : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius ?? 4.0),
+                borderSide: BorderSide(
+                    width: 2, color: borderColor ?? AppColors.primaryColor),
+              ),
+        errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 4.0),
-          borderSide:
-              BorderSide(width: 1.3, color: borderColor ?? AppColors.grey),
-        ):
-        OutlineInputBorder(
+          borderSide: const BorderSide(width: 1.3, color: AppColors.red),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 4.0),
-          borderSide: BorderSide(
-              width: 2, color: borderColor ?? AppColors.primaryColor),
+          borderSide: const BorderSide(width: 1.3, color: AppColors.red),
         ),
         suffixIcon: suffixIcon,
         fillColor: fillColor ?? (dark ? AppColors.darkerGrey : AppColors.light),

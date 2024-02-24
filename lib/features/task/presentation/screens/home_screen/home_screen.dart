@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                 onDateChange: (date) {},
               ),
               verticalSapce(30),
-
+          
               //! Task
               const TasksListView(),
             ],
