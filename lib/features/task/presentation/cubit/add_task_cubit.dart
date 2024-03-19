@@ -110,7 +110,6 @@ class TaskCubit extends Cubit<TaskState> {
   void addTask() async {
     emit(AddTaskLoadingState());
     try {
-      await Future.delayed(const Duration(seconds: 3));
       final task = TaskModel(
         title: title.text,
         note: note.text,

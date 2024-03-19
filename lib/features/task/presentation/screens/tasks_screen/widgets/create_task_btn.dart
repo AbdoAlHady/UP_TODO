@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/core/helpers/extension.dart';
+import 'package:todo_app/core/helpers/loaders.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/features/task/presentation/cubit/add_task_state.dart';
 
@@ -19,6 +20,8 @@ class CreateTaskBtn extends StatelessWidget {
       listener: (context, state) {
         if (state is AddTaskSuccessState) {
           context.pop();
+          Loaders.showToast(
+              message: 'Added Successfly.', type: ToastState.success);
         }
       },
       builder: (context, state) {
@@ -33,7 +36,7 @@ class CreateTaskBtn extends StatelessWidget {
             buttonText: AppStrings.createTask,
             textStyle: Theme.of(context).textTheme.titleSmall!,
             onPressed: () {
-              if (context.read<TaskCubit>().formKey.currentState!.validate()) {
+              if (context.read<TaskCubit>().formKey.currentState?.validate()==true) {
                 context.read<TaskCubit>().addTask();
               }
             },

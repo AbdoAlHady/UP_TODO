@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:todo_app/core/di/dependancy_jnjection.dart';
 import 'package:todo_app/core/routing/routes.dart';
 import 'package:todo_app/features/authentication/presentaion/cubit/on_boarding_cubit.dart';
@@ -21,18 +20,19 @@ class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: getIt<TaskCubit>(),
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<TaskCubit>(),
             child: const HomeScreen(),
           ),
         );
       case Routes.addTaskScreen:
         return MaterialPageRoute(
-          builder: (context) =>  BlocProvider.value(
-           value: getIt<TaskCubit>(),
+          builder: (context) => BlocProvider(
+            create:(context) => getIt<TaskCubit>(),
             child: const AddTaskScreen(),
           ),
         );
+
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(
