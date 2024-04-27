@@ -20,3 +20,18 @@ class ChangeColorState extends TaskState{}
 class AddTaskLoadingState extends TaskState{}
 class AddTaskSuccessState extends TaskState{}
 class AddTaskFailureState extends TaskState{}
+
+class GetTasksLoadingState extends TaskState{}
+class GetTasksSuccessState extends TaskState{}
+class GetTasksFailureState extends TaskState{}
+
+class UpdateTaskLoadingState extends TaskState{}
+class UpdateTaskSuccessState extends TaskState{}
+class UpdateTaskFailureState extends TaskState{}
+
+class DeleteTaskLoadingState extends TaskState{}
+class DeleteTaskSuccessState extends TaskState{}
+class DeleteTaskFailureState extends TaskState{}
+
+
+class ChangeSelectedDateSuccessState extends TaskState{}

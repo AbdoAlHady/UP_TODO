@@ -4,7 +4,6 @@ import 'package:todo_app/core/di/dependancy_jnjection.dart';
 import 'package:todo_app/core/routing/routes.dart';
 import 'package:todo_app/features/authentication/presentaion/cubit/on_boarding_cubit.dart';
 import 'package:todo_app/features/authentication/presentaion/screens/onboarding_screen/on_boarding_screen.dart';
-import 'package:todo_app/features/task/presentation/cubit/add_task_cubit.dart';
 import 'package:todo_app/features/task/presentation/screens/home_screen/home_screen.dart';
 import 'package:todo_app/features/task/presentation/screens/tasks_screen/add_task_screen.dart';
 
@@ -20,17 +19,11 @@ class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<TaskCubit>(),
-            child: const HomeScreen(),
-          ),
+          builder: (context) => const HomeScreen(),
         );
       case Routes.addTaskScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create:(context) => getIt<TaskCubit>(),
-            child: const AddTaskScreen(),
-          ),
+          builder: (context) => const AddTaskScreen(),
         );
 
       default:

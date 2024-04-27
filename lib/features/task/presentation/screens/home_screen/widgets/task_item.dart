@@ -19,7 +19,7 @@ class TaskItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        taskBottomSheet(context);
+        taskBottomSheet(context,task.id!,task.isComplete);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10.h),
@@ -74,7 +74,7 @@ class TaskItem extends StatelessWidget {
               ),
             ),
             TaskStatus(
-              isComplete: task.isComplete,
+              isComplete: task.isComplete==1?true:false,
             )
           ],
         ),

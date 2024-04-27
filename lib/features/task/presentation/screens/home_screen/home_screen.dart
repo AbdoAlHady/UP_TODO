@@ -1,5 +1,6 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/core/helpers/extension.dart';
@@ -7,7 +8,10 @@ import 'package:todo_app/core/helpers/spacing.dart';
 import 'package:todo_app/core/routing/routes.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
+import 'package:todo_app/features/task/presentation/cubit/add_task_cubit.dart';
 import 'package:todo_app/features/task/presentation/screens/home_screen/widgets/tasks_list_view.dart';
+
+import 'widgets/update_and_delete_task_bloc_listener.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,12 +42,15 @@ class HomeScreen extends StatelessWidget {
                 dateTextStyle: Theme.of(context).textTheme.titleSmall!,
                 monthTextStyle: Theme.of(context).textTheme.titleSmall!,
                 dayTextStyle: Theme.of(context).textTheme.titleSmall!,
-                onDateChange: (date) {},
+                onDateChange: (date) {
+                  context.read<TaskCubit>().changeSelectedDate(date);
+                },
               ),
               verticalSapce(30),
-          
-              //! Task
+
+              //! Task,
               const TasksListView(),
+              const UpdateAndDeleteTaskBlocListener(),
             ],
           ),
         ),
@@ -60,5 +67,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
