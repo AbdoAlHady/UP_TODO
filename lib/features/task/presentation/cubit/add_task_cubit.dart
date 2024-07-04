@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/core/database/sqflite_helper/sqflite_helper.dart';
 import 'package:todo_app/core/di/dependancy_jnjection.dart';
+import 'package:todo_app/core/services/local_notification_service.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../data/model/task_model.dart';
@@ -13,7 +14,8 @@ class TaskCubit extends Cubit<TaskState> {
 
   TextEditingController title = TextEditingController();
   TextEditingController note = TextEditingController();
-  String currentDate = DateFormat.yMd().format(DateTime.now());
+  DateTime currentDate = DateTime.now();
+  // String currentDate = DateFormat.yMd().format(DateTime.now());
   String selectedDate = DateFormat.yMd().format(DateTime.now());
   String startTime = DateFormat('hh:mm a').format(DateTime.now());
   String endTime = DateFormat('hh:mm a')
@@ -21,7 +23,7 @@ class TaskCubit extends Cubit<TaskState> {
   int currentIndex = 0;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<TaskModel> tasksList = [];
-
+  late TimeOfDay scheduledTime;
   //! Get Date
   void getDate(context) async {
     emit(GetDateLoadingState());
@@ -31,7 +33,7 @@ class TaskCubit extends Cubit<TaskState> {
       lastDate: DateTime(2025),
     );
     if (selectedDate != null) {
-      currentDate = DateFormat.yMd().format(selectedDate);
+      currentDate = selectedDate;
       emit(GetDateSuccessState());
     } else {
       emit(GetDateFailureState());
@@ -53,8 +55,11 @@ class TaskCubit extends Cubit<TaskState> {
         context: context, initialTime: TimeOfDay.fromDateTime(DateTime.now()));
     if (selectedStartTime != null) {
       startTime = selectedStartTime.format(context);
+      scheduledTime = selectedStartTime;
       emit(GetStartTimeSuccessState());
     } else {
+      scheduledTime =
+          TimeOfDay(hour: currentDate.hour, minute: currentDate.minute);
       emit(GetStartTimeFailureState());
     }
   }
@@ -106,16 +111,35 @@ class TaskCubit extends Cubit<TaskState> {
         note: note.text,
         startTime: startTime,
         endTime: endTime,
-        date: currentDate,
+        date: DateFormat.yMd().format(currentDate),
         isComplete: 0,
         color: currentIndex,
       );
-      await getIt<SqfliteHelper>().insertToDB(task);
+      final int response = await getIt<SqfliteHelper>().insertToDB(task);
+      final parts = task.startTime.split(":");
+      final hour = int.parse(parts[0]);
+      final minute = int.parse(parts[1].split('').first);
+      TimeOfDay taskTime = TimeOfDay(hour: hour, minute: minute);
+      DateTime now =currentDate;
+      DateTime specificDateTime = DateTime(
+          now.year, now.month, now.day, taskTime.hour, taskTime.minute);
+
+      if ((specificDateTime.isBefore(now))||(specificDateTime.isAtSameMomentAs(now))) {
+        debugPrint('sssssssssssssssssssssame');
+      }else{
+        LocalNotificationService.showScheduledNotification(
+          currentDate: currentDate,
+          schduledTime: scheduledTime,
+          taskModel: task,
+          notificationId: response,
+        );
+      }
+
       await getTasks();
       title.clear();
       note.clear();
       currentIndex = 0;
-      currentDate = DateFormat.yMd().format(DateTime.now());
+      currentDate = DateTime.now();
       startTime = DateFormat('hh:mm a').format(DateTime.now());
       endTime = DateFormat('hh:mm a')
           .format(DateTime.now().add(const Duration(minutes: 30)));
@@ -158,10 +182,23 @@ class TaskCubit extends Cubit<TaskState> {
   Future<void> deleteTask(int id) async {
     emit(DeleteTaskLoadingState());
     try {
+      final task = tasksList.firstWhere((element) => element.id == id);
+      final parts = task.startTime.split(":");
+      final hour = int.parse(parts[0]);
+      final minute = int.parse(parts[1].split('').first);
+      TimeOfDay specificTime = TimeOfDay(hour: hour, minute: minute);
+      DateTime now = DateTime.now();
+      DateTime specificDateTime = DateTime(
+          now.year, now.month, now.day, specificTime.hour, specificTime.minute);
+
+      if (specificDateTime.isBefore(now)) {
+        LocalNotificationService.cancelNotification(notificationId: id);
+      }
       await getIt<SqfliteHelper>().deleteFromDB(id);
       emit(DeleteTaskSuccessState());
       getTasks();
     } catch (e) {
+      debugPrint('delete task error: $e');
       emit(DeleteTaskFailureState());
     }
   }

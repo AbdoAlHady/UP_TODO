@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/features/task/presentation/cubit/add_task_state.dart';
 
 import '../../../../../../core/helpers/spacing.dart';
@@ -22,7 +23,8 @@ class TaskDate extends StatelessWidget {
             verticalSapce(10),
             AppTextFormField(
               readOnly: true,
-              hintText: context.read<TaskCubit>().currentDate,
+              hintText: DateFormat.yMd().format(
+                  context.watch<TaskCubit>().currentDate),
               suffixIcon: GestureDetector(
                   onTap: () {
                     context.read<TaskCubit>().getDate(context);
