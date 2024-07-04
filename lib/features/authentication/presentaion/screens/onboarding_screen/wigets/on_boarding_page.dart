@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/helpers/helper_functions.dart';
 import '../../../../../../core/helpers/spacing.dart';
 import '../../../../../../core/utils/app_colors.dart';
@@ -20,7 +21,7 @@ class OnBoardingPage extends StatelessWidget {
             children: [
               verticalSapce(15),
               /// Image
-              Image.asset(image),
+              Image.asset(image,height: 400.h,),
               verticalSapce(16),
               /// Dots
               verticalSapce(50),

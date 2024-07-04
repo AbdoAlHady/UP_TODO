@@ -120,21 +120,26 @@ class TaskCubit extends Cubit<TaskState> {
       final hour = int.parse(parts[0]);
       final minute = int.parse(parts[1].split('').first);
       TimeOfDay taskTime = TimeOfDay(hour: hour, minute: minute);
-      DateTime now =currentDate;
+      DateTime now = currentDate;
       DateTime specificDateTime = DateTime(
           now.year, now.month, now.day, taskTime.hour, taskTime.minute);
 
-      if ((specificDateTime.isBefore(now))||(specificDateTime.isAtSameMomentAs(now))) {
-        debugPrint('sssssssssssssssssssssame');
-      }else{
-        LocalNotificationService.showScheduledNotification(
-          currentDate: currentDate,
-          schduledTime: scheduledTime,
-          taskModel: task,
-          notificationId: response,
-        );
-      }
-
+      // if ((specificDateTime.isAfter(DateTime.now()))||(specificDateTime.isAtSameMomentAs(now))) {
+      //   debugPrint('sssssssssssssssssssssame');
+      // }else{
+      // LocalNotificationService.showScheduledNotification(
+      //   currentDate: currentDate,
+      //   schduledTime: scheduledTime,
+      //   taskModel: task,
+      //   notificationId: response,
+      // );
+      // // }
+      LocalNotificationService.showScheduledNotification(
+        currentDate: currentDate,
+        schduledTime: scheduledTime,
+        taskModel: task,
+        notificationId: response,
+      );
       await getTasks();
       title.clear();
       note.clear();

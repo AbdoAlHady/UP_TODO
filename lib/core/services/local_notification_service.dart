@@ -145,7 +145,8 @@ class LocalNotificationService {
       android: android,
     );
     tz.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation('Asia/Riyadh'));
+    final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(currentTimeZone));
     var currentTime = tz.TZDateTime.now(tz.local);
     log("currentTime.year:${currentTime.year}");
     log("currentTime.month:${currentTime.month}");

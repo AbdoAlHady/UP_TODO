@@ -14,7 +14,7 @@ class OnBoardingDotNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 420.h,
+      top: 450.h,
       left: 88.w,
       child: SmoothPageIndicator(
         controller: context.read<OnBoardingCubit>().controller,
