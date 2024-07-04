@@ -8,7 +8,7 @@ import 'package:todo_app/features/task/presentation/screens/home_screen/home_scr
 import 'package:todo_app/features/task/presentation/screens/tasks_screen/add_task_screen.dart';
 
 class AppRouter {
-  Route generateRoute(RouteSettings settings) {
+  Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
@@ -27,13 +27,7 @@ class AppRouter {
         );
 
       default:
-        return MaterialPageRoute(
-          builder: (context) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
-        );
+        return null;
     }
   }
 }
